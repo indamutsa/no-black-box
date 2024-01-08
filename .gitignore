@@ -1,0 +1,4 @@
+data/dataset/image
+data/dataset/json
+server/node_modules
+server/node_modules/canvas/build/Release/librsvg-2.so.2
