@@ -98,6 +98,15 @@ class SketchPad {
     if (this.onUpdate) {
       this.onUpdate(this.paths);
     }
+
+    // To make sure toggle input button does not clear the canvas rather the drawn sketch is persisted
+    this.triggerUpdate();
+  }
+
+  triggerUpdate() {
+    if (this.onUpdate) {
+      this.onUpdate(this.paths);
+    }
   }
 
   #getMouse = (e) => {

@@ -35,10 +35,21 @@ class Chart {
     this.pixelBounds = this.#getPixelBounds();
     this.dataBounds = this.#getDataBounds();
     this.defaultDataBounds = this.#getDataBounds();
+    this.dynamicPoint = null;
 
     this.#draw();
 
     this.#addEventListeners();
+  }
+
+  showDynamicPoint(point) {
+    this.dynamicPoint = point;
+    this.#draw();
+  }
+
+  hideDynamicPoint() {
+    this.dynamicPoint =null;
+    this.#draw();
   }
 
   #addEventListeners() {
@@ -188,6 +199,20 @@ class Chart {
 
     if (this.selectedSample) {
       this.#emphasizeSample(this.selectedSample, "yellow");
+    }
+
+    // Integration of dynamic point
+    if (this.dynamicPoint) {
+      const pixelLoc = math.remapPoint(
+        this.dataBounds,
+        this.pixelBounds,
+        this.dynamicPoint
+      )
+      
+      // The first big point is to blur the background, so that we can see the dynamic point better
+      graphics.drawPoint(ctx, pixelLoc, "rgba(255,255,255,0.7)", 1000000);
+      // Draw the dynamic point
+      graphics.drawPoint(ctx, pixelLoc, "red");
     }
 
     this.#drawAxes();

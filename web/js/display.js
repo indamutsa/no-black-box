@@ -67,7 +67,12 @@ function handleClick(sample, doScroll = true) {
 
 function toggleInput() {
   const inputContainer = document.getElementById("inputContainer");
-  if (inputContainer.style.display == "none")
+  if (inputContainer.style.display == "none"){
     inputContainer.style.display = "block";
-  else inputContainer.style.display = "none";
+    sketchpad.triggerUpdate();
+  }
+  else {
+    inputContainer.style.display = "none";
+    chart.hideDynamicPoint();
+  }
 }
